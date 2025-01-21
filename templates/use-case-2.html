@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiquidAI - Intelligent Energy Management</title>
+    <!-- Add Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Update root styles with font */
+        :root {
+            --grey: #4a4a4a;
+            --light-grey: #f5f5f5;
+            --orange: #ff7849;
+            --light-purple: #c4b5fd;
+            --dark-purple: #8b5cf6;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-primary);
+        }
+
+        body {
+            background-color: #ffffff;
+            color: var(--grey);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header styling */
+        header {
+            position: relative;
+        }
+
+        /* Typography updates */
+        h1 {
+            font-family: var(--font-primary);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-purple);
+            display: inline-block;
+        }
+
+        h3 {
+            font-family: var(--font-primary);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            font-family: var(--font-primary);
+            font-weight: 400;
+            color: #636e72;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Sections */
+        section {
+            position: relative;
+            padding: 5rem 0;
+        }
+
+        section h2 {
+            position: relative;
+            padding-left: 1.5rem; /* Space for the gradient line */
+            margin-bottom: 2rem;
+        }
+
+        section h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--orange), var(--light-purple));
+            border-radius: 4px;
+        }
+
+        /* Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Clean card styles without background color */
+        .card {
+            padding: 2.5rem;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-size: cover;
+            background-position: center;
+            min-height: 250px;
+            border: 1px solid #000000;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #000000;
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .card p {
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .card i {
+            color: white;
+        }
+
+        /* Button styling */
+        .button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--light-purple) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2);
+        }
+
+        /* Lists */
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        ul li {
+            margin-bottom: 0.8rem;
+            color: #636e72;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        ul li:before {
+            content: "•";
+            color: #2d3436;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Contact section */
+        .contact {
+            background: linear-gradient(135deg, var(--light-grey) 0%, white 100%);
+            text-align: center;
+            padding: 4rem;
+            border-radius: 16px;
+            margin-top: 4rem;
+        }
+
+        .contact i {
+            font-size: 2rem;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .contact p {
+            margin: 0.5rem 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Simplified header and video styles */
+        .video-header {
+            position: relative;
+            overflow: hidden;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center; /* Vertical centering */
+            justify-content: center; /* Horizontal centering */
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
+
+        .header-content h1 {
+            color: #000000;
+            font-weight: 400;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            letter-spacing: -0.03em;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header-subtitle {
+            color: #666666;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        /* Remove any other background-related styles that might interfere */
+        .grid {
+            background: none;
+        }
+
+        section::before {
+            display: none;
+        }
+
+        /* Add specific styling for executive summary section */
+        .executive-summary p {
+            color: #000000;
+            text-shadow: none; /* Remove any text shadow if present */
+        }
+
+        /* Updated navigation styles to remove fixed positioning */
+        .nav-menu {
+            position: absolute; /* Changed from fixed to absolute */
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .nav-menu select {
+            padding: 10px 15px;
+            border: 1px solid #000000;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            color: #000000;
+            cursor: pointer;
+            outline: none;
+            min-width: 350px;
+            appearance: none;
+            background-image: linear-gradient(45deg, transparent 50%, #000000 50%),
+                             linear-gradient(135deg, #000000 50%, transparent 50%);
+            background-position: calc(100% - 20px) calc(1em + 2px),
+                               calc(100% - 15px) calc(1em + 2px);
+            background-size: 5px 5px,
+                              5px 5px;
+            background-repeat: no-repeat;
+            transition: all 0.3s ease;
+            padding-right: 40px;
+        }
+
+        .nav-menu select:hover {
+            border-color: var(--dark-purple);
+            background: rgba(255, 255, 255, 0.3); /* Slightly more visible on hover */
+        }
+
+        .nav-menu select:focus {
+            border-color: var(--dark-purple);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Style for the options within the dropdown */
+        .nav-menu select option {
+            font-family: var(--font-primary);
+            padding: 10px;
+            background: white;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Updated dropdown options -->
+    <div class="nav-menu">
+        <select onchange="window.location.href=this.value">
+            <option value="{{ url_for('use_case_1') }}" {% if active_page == 'use-case-1' %}selected{% endif %}>
+                Liquid Use Case 1: Energy Management
+            </option>
+            <option value="{{ url_for('use_case_2') }}" {% if active_page == 'use-case-2' %}selected{% endif %}>
+                Liquid Use Case 2: Digital Accessibility
+            </option>
+        </select>
+    </div>
+
+    <header class="video-header">
+        <video class="video-background" autoplay muted loop playsinline>
+            <source src="{{ url_for('static', filename='liquidVideo.mp4') }}" type="video/mp4">
+        </video>
+        <div class="container header-content">
+            <h1>🌐✨ Advancing Digital Accessibility with LiquidAI</h1>
+            <p class="header-subtitle">Powered by LiquidAI</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>Accessibility in the digital era means inclusivity for all. LiquidAI models empower organizations to develop AI-driven solutions that break barriers for people with disabilities. Whether translating sign language, adapting visuals for people with color blindness, or optimizing interfaces for users with diverse abilities, LiquidAI's lightweight, edge-friendly, and high-performing models redefine what's possible in accessible technology.</p>
+        </section>
+
+        <section>
+            <h2>The Challenge</h2>
+            <div class="grid">
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.37.png') }}')">
+                    <h3><i class="fas fa-universal-access"></i> Limited Accessibility</h3>
+                    <p>Many platforms lack features that accommodate people with disabilities.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.53.png') }}')">
+                    <h3><i class="fas fa-microchip"></i> High Computational Costs</h3>
+                    <p>Developing and running accessibility tools can be resource-intensive.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.04.03.png') }}')">
+                    <h3><i class="fas fa-wifi"></i> Edge Accessibility</h3>
+                    <p>Not all users have access to high-performance internet, limiting real-time solutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>The Solution</h2>
+            <div class="grid">
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.04.13.png') }}')">
+                    <h3><i class="fas fa-sign-language"></i> Real-Time Sign Language</h3>
+                    <p>Models capable of translating sign language into text or speech on edge devices.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.37.png') }}')">
+                    <h3><i class="fas fa-eye"></i> Color Blindness Adaptation</h3>
+                    <p>Dynamic adjustments to UI elements for users with color vision deficiencies.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.53.png') }}')">
+                    <h3><i class="fas fa-microphone"></i> Voice-Driven Interaction</h3>
+                    <p>Accurate speech-to-text and text-to-speech models for users with disabilities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>How It Works</h2>
+            <div class="grid">
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.04.03.png') }}')">
+                    <h3><i class="fas fa-feather"></i> Lightweight Models</h3>
+                    <p>Designed to run efficiently on edge devices, ensuring accessibility in low-resource settings.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.04.13.png') }}')">
+                    <h3><i class="fas fa-layer-group"></i> Multimodal Capabilities</h3>
+                    <p>Seamlessly integrate visual, textual, and audio data for holistic solutions.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.37.png') }}')">
+                    <h3><i class="fas fa-shield-alt"></i> Privacy-First Design</h3>
+                    <p>Process sensitive user data locally, safeguarding personal information.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Business Impact</h2>
+            <div class="grid">
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.53.png') }}')">
+                    <h3><i class="fas fa-chart-line"></i> Expand Market Reach</h3>
+                    <p>Inclusivity brings new user segments, driving growth and reputation.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.04.03.png') }}')">
+                    <h3><i class="fas fa-coins"></i> Cost Efficiency</h3>
+                    <p>Edge-compatible models reduce cloud infrastructure costs.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.04.13.png') }}')">
+                    <h3><i class="fas fa-check-circle"></i> Compliance</h3>
+                    <p>Ensure adherence to global accessibility standards (ADA, WCAG).</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Next Steps</h2>
+            <div class="grid">
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.37.png') }}')">
+                    <h3><i class="fas fa-tasks"></i> Define Priorities</h3>
+                    <p>Partner with organizations to identify key accessibility challenges.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.03.53.png') }}')">
+                    <h3><i class="fas fa-rocket"></i> Pilot Development</h3>
+                    <p>Build a prototype focusing on specific features like real-time sign language translation.</p>
+                </div>
+                <div class="card" style="background-image: url('{{ url_for('static', filename='Bildschirmfoto 2025-01-21 um 11.04.03.png') }}')">
+                    <h3><i class="fas fa-expand-arrows-alt"></i> Refine and Scale</h3>
+                    <p>Iterate based on user feedback and scale across platforms and regions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <i class="fas fa-envelope-open-text"></i>
+            <h2>Contact</h2>
+            <h3>Cyrine Chaabani</h3>
+            <p>ML Engineer and Product Manager</p>
+            <p>📧 cyrine.chaabani19@gmail.com</p>
+            <p>📱 +4917627285550</p>
+            <a href="#" class="button">Get in Touch <i class="fas fa-arrow-right"></i></a>
+        </section>
+    </div>
+</body>
+</html> 
